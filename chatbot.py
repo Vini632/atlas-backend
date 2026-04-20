@@ -2,6 +2,7 @@
 ATLAS AI Chatbot - Versão Proteção Avançada
 """
 
+import os
 import requests
 import re
 
@@ -30,9 +31,9 @@ class AtlasChatbot:
         r"(sudo|rm -rf|del /f|chmod 777)",
     ]
     
-    def __init__(self, model="llama3", ollama_url="http://localhost:11434"):
+    def __init__(self, model="llama3", ollama_url=None):
         self.model = model
-        self.ollama_url = ollama_url
+        self.ollama_url = ollama_url or os.environ.get("OLLAMA_URL", "http://localhost:11434")
         
     def _validate_input(self, text):
         if not isinstance(text, str):
